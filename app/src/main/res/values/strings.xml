@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Space Wars</string>
+    <string name="leftButtonText">Left</string>
+    <string name="rightButtonText">Right</string>
+</resources>
