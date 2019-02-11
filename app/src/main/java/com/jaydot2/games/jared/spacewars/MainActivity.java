@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,9 +18,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private Button leftBtn;
     private Button rightBtn;
     private ImageView spaceship;
+
+    private static final long SHORT_ANNIMATION_DURATION = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,39 +70,57 @@ public class MainActivity extends AppCompatActivity {
                 ConstraintSet constraintSet1 = new ConstraintSet();
                 ConstraintSet constraintSet2 = new ConstraintSet();
 
-                //TransitionManager.beginDelayedTransition();
-                int top = spaceship.getTop();
-                int left = spaceship.getLeft();
-                int h = spaceship.getHeight();
-
-                int x = layoutParams.leftMargin;
-                int y = layoutParams.topMargin;
-
-                int x1 = layoutParams.getMarginEnd();
-                int y1 = layoutParams.editorAbsoluteY;
-
-                sendMessageToScreen("Move spaceship left! " + top + " and from top is " + left);
-                spaceship.setLeft(left + 10);
-                spaceship.setLayoutParams(layoutParams);
+//                //TransitionManager.beginDelayedTransition();
+//                int top = spaceship.getTop();
+//                int left = spaceship.getLeft();
+//                int spaceshipHeight = spaceship.getHeight();
+//
+//                int x = layoutParams.leftMargin;
+//                int y = layoutParams.topMargin;
+//
+//                int x1 = layoutParams.getMarginEnd();
+//                int y1 = layoutParams.editorAbsoluteY;
+//
+//                sendMessageToScreen("Move spaceship left! " + top + " and from top is " + left);
+//                spaceship.setLeft(left + 10);
+//                spaceship.setLayoutParams(layoutParams);
             }
         };
 
     }
 
     protected void startLeftAnimation() {
-        int top = spaceship.getTop();
-        int left, startSpaceshipPosition = spaceship.getLeft();
-        int h, stopSpaceshipPosition = spaceship.getWidth();
-
-        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(spaceship, "left", startSpaceshipPosition, stopSpaceshipPosition).setDuration(2000);
-        objectAnimator.start();
+        Log.d(TAG, "start left animation...");
+//        int top = spaceship.getTop();
+//        int left, startSpaceshipPosition = spaceship.getLeft();
+//        int h, stopSpaceshipPosition = spaceship.getWidth();
+//
+//        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(spaceship, "left", startSpaceshipPosition, stopSpaceshipPosition).setDuration(2000);
+//        objectAnimator.start();
+        float fromX = spaceship.getX();
+        float toX = spaceship.getX() - 100;
+        float fromY = spaceship.getY();
+        float toY = spaceship.getY();
+        Animation rocketLeftAnimation = new TranslateAnimation(fromX, toX, fromY, toY);
+        rocketLeftAnimation.setFillAfter(false);
+        rocketLeftAnimation.setDuration(SHORT_ANNIMATION_DURATION);
+        spaceship.startAnimation(rocketLeftAnimation);
     }
 
     protected void startRightAnimation() {
-        int right, startSpaceshipPosition = spaceship.getRight();
-        int w, stopSpaceshipPosition = spaceship.getWidth();
-
-        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(spaceship, "right", startSpaceshipPosition, stopSpaceshipPosition).setDuration(2000);
-        objectAnimator.start();
+        Log.d(TAG, "start right animation...");
+//        int right, startSpaceshipPosition = spaceship.getRight();
+//        int w, stopSpaceshipPosition = spaceship.getWidth();
+//
+//        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(spaceship, "right", startSpaceshipPosition, stopSpaceshipPosition).setDuration(2000);
+//        objectAnimator.start();
+        float fromX = spaceship.getX();
+        float toX = spaceship.getX() + 100;
+        float fromY = spaceship.getY();
+        float toY = spaceship.getY();
+        Animation rocketLeftAnimation = new TranslateAnimation(fromX, toX, fromY, toY);
+        rocketLeftAnimation.setFillAfter(false);
+        rocketLeftAnimation.setDuration(SHORT_ANNIMATION_DURATION);
+        spaceship.startAnimation(rocketLeftAnimation);
     }
 }
